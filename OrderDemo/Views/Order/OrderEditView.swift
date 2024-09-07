@@ -11,6 +11,7 @@ import SwiftData
 
 struct OrderEditView: View {
     @Environment(\.modelContext) private var modelContext
+    @State private var uiRefresher: Bool = false
     
     let order: Order
 
@@ -44,6 +45,7 @@ struct OrderEditView: View {
             }
         }
         .navigationTitle("\(order.nameOnOrder) Order Items")
+        .opacity(uiRefresher ? 1: 1)
     }
 
     private func addItem() {
@@ -51,6 +53,7 @@ struct OrderEditView: View {
             let newItem = OrderItem(itemTitle: String.randomWord().capitalized)
             newItem.order = order
             modelContext.insert(newItem)
+            uiRefresher.toggle()
         }
     }
 
