@@ -50,6 +50,7 @@ struct OrderEditView: View {
         withAnimation {
             let newItem = OrderItem(itemTitle: String.randomWord().capitalized)
             newItem.order = order
+            order.orderItems.append(newItem)
             modelContext.insert(newItem)
         }
     }
