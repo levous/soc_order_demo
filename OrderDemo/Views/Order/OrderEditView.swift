@@ -22,9 +22,7 @@ struct OrderEditView: View {
                 }
             }
             
-            ForEach(order.orderItems.sorted(by: { item1, item2 in
-                item1.createdAt > item2.createdAt
-            })) { item in
+            ForEach(order.dateDescendingSortedOrderItems) { item in
                 NavigationLink {
                     OrderItemDetailView(orderItem: item)
                 } label: {
@@ -60,7 +58,7 @@ struct OrderEditView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(order.orderItems[index])
+                modelContext.delete(order.dateDescendingSortedOrderItems[index])
             }
         }
     }
