@@ -5,28 +5,34 @@
 //  Created by Russell Zarse on 9/7/24.
 //
 
+import OSLog
 import SwiftUI
 import SwiftData
 
 @main
 struct OrderDemoApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            OrderItem.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
+    
+    private let logger = Logger.make(withType: OrderDemoApp.self)
+    
+    init() {
+        
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let configuration = ModelConfiguration(isStoredInMemoryOnly: false)
+            let container = try ModelContainer(for: Order.self, OrderItem.self, configurations: configuration)
+            let modelContext = ModelContext(container)
+            DataServiceFactory.configure(
+                orderDB: OrderDB(modelContext: modelContext),
+                orderItemDB: OrderItemDB(modelContext: modelContext)
+            )
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            logger.error("Failed to configure DataServiceFactory. \(error.localizedDescription)")
         }
-    }()
+        
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
     }
 }

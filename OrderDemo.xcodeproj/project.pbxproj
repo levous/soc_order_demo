@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6C541712CBD9D3900633182 /* Logger+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C541702CBD9D3900633182 /* Logger+extensions.swift */; };
+		E6C541732CBDBBFD00633182 /* OrderEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C541722CBDBBFD00633182 /* OrderEditViewModel.swift */; };
+		E6C541752CBDC34000633182 /* OrderItemDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C541742CBDC34000633182 /* OrderItemDB.swift */; };
+		E6D4159A2CBD999600278490 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D415992CBD999600278490 /* DataService.swift */; };
+		E6D4159D2CBD9A8800278490 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4159C2CBD9A8800278490 /* Database.swift */; };
+		E6D4159F2CBD9AB000278490 /* SwiftDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4159E2CBD9AB000278490 /* SwiftDatabase.swift */; };
+		E6D415A12CBD9B1B00278490 /* OrderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D415A02CBD9B1B00278490 /* OrderDB.swift */; };
+		E6D415A42CBD9B8700278490 /* OrderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D415A32CBD9B8700278490 /* OrderListViewModel.swift */; };
+		E6D415A62CBD9C1C00278490 /* DataServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D415A52CBD9C1C00278490 /* DataServiceFactory.swift */; };
 		E6F39D952C8CA65700938FF9 /* OrderDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F39D942C8CA65700938FF9 /* OrderDemoApp.swift */; };
 		E6F39D972C8CA65700938FF9 /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F39D962C8CA65700938FF9 /* OrderListView.swift */; };
 		E6F39D992C8CA65700938FF9 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F39D982C8CA65700938FF9 /* OrderItem.swift */; };
@@ -33,6 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6C541702CBD9D3900633182 /* Logger+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+extensions.swift"; sourceTree = "<group>"; };
+		E6C541722CBDBBFD00633182 /* OrderEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderEditViewModel.swift; sourceTree = "<group>"; };
+		E6C541742CBDC34000633182 /* OrderItemDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemDB.swift; sourceTree = "<group>"; };
+		E6D415992CBD999600278490 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		E6D4159C2CBD9A8800278490 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		E6D4159E2CBD9AB000278490 /* SwiftDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDatabase.swift; sourceTree = "<group>"; };
+		E6D415A02CBD9B1B00278490 /* OrderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDB.swift; sourceTree = "<group>"; };
+		E6D415A32CBD9B8700278490 /* OrderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewModel.swift; sourceTree = "<group>"; };
+		E6D415A52CBD9C1C00278490 /* DataServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceFactory.swift; sourceTree = "<group>"; };
 		E6F39D912C8CA65700938FF9 /* OrderDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6F39D942C8CA65700938FF9 /* OrderDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDemoApp.swift; sourceTree = "<group>"; };
 		E6F39D962C8CA65700938FF9 /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
@@ -69,6 +87,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E6D415982CBD998900278490 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E6D4159B2CBD9A7E00278490 /* Database */,
+				E6D415992CBD999600278490 /* DataService.swift */,
+				E6D415A52CBD9C1C00278490 /* DataServiceFactory.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E6D4159B2CBD9A7E00278490 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				E6D4159C2CBD9A8800278490 /* Database.swift */,
+				E6D415A02CBD9B1B00278490 /* OrderDB.swift */,
+				E6C541742CBDC34000633182 /* OrderItemDB.swift */,
+				E6D4159E2CBD9AB000278490 /* SwiftDatabase.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		E6D415A22CBD9B5F00278490 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E6C541722CBDBBFD00633182 /* OrderEditViewModel.swift */,
+				E6D415A32CBD9B8700278490 /* OrderListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		E6F39D882C8CA65700938FF9 = {
 			isa = PBXGroup;
 			children = (
@@ -90,10 +138,12 @@
 		E6F39D932C8CA65700938FF9 /* OrderDemo */ = {
 			isa = PBXGroup;
 			children = (
-				E6F39DD22C8CBB2500938FF9 /* ViewModifiers */,
 				E6F39DCD2C8CB7D700938FF9 /* Extensions */,
-				E6F39DC22C8CA68B00938FF9 /* Views */,
 				E6F39DC12C8CA68000938FF9 /* Models */,
+				E6D415982CBD998900278490 /* Services */,
+				E6D415A22CBD9B5F00278490 /* ViewModels */,
+				E6F39DD22C8CBB2500938FF9 /* ViewModifiers */,
+				E6F39DC22C8CA68B00938FF9 /* Views */,
 				E6F39D942C8CA65700938FF9 /* OrderDemoApp.swift */,
 				E6F39D9A2C8CA65800938FF9 /* Assets.xcassets */,
 				E6F39D9C2C8CA65800938FF9 /* OrderDemo.entitlements */,
@@ -151,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				E6F39DCE2C8CB7E200938FF9 /* String+extensions.swift */,
+				E6C541702CBD9D3900633182 /* Logger+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -263,15 +314,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D415A42CBD9B8700278490 /* OrderListViewModel.swift in Sources */,
 				E6F39D972C8CA65700938FF9 /* OrderListView.swift in Sources */,
 				E6F39D992C8CA65700938FF9 /* OrderItem.swift in Sources */,
 				E6F39DD12C8CBA9900938FF9 /* OrderItemDetailView.swift in Sources */,
 				E6F39DD42C8CBB3D00938FF9 /* TextModifiers.swift in Sources */,
+				E6C541732CBDBBFD00633182 /* OrderEditViewModel.swift in Sources */,
 				E6F39DC92C8CA90200938FF9 /* ContentView.swift in Sources */,
+				E6D415A12CBD9B1B00278490 /* OrderDB.swift in Sources */,
+				E6D4159A2CBD999600278490 /* DataService.swift in Sources */,
+				E6D4159D2CBD9A8800278490 /* Database.swift in Sources */,
+				E6C541752CBDC34000633182 /* OrderItemDB.swift in Sources */,
 				E6F39DC42C8CA6C600938FF9 /* Order.swift in Sources */,
+				E6D4159F2CBD9AB000278490 /* SwiftDatabase.swift in Sources */,
 				E6F39DCF2C8CB7E200938FF9 /* String+extensions.swift in Sources */,
 				E6F39DCC2C8CAA1700938FF9 /* PreviewData.swift in Sources */,
+				E6D415A62CBD9C1C00278490 /* DataServiceFactory.swift in Sources */,
 				E6F39DC72C8CA81500938FF9 /* OrderEditView.swift in Sources */,
+				E6C541712CBD9D3900633182 /* Logger+extensions.swift in Sources */,
 				E6F39D952C8CA65700938FF9 /* OrderDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

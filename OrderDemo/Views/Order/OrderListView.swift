@@ -5,18 +5,19 @@
 //  Created by Russell Zarse on 9/7/24.
 //
 
+import OSLog
 import SwiftUI
 import SwiftData
 
 struct OrderListView: View {
-    @Environment(\.modelContext) private var modelContext
-
-    @Query private var orders: [Order]
+    
+    private let logger: Logger = Logger.make(withType: OrderListView.self)
+    let viewModel: OrderListViewModel
 
     var body: some View {
         
         List {
-            ForEach(orders) { order in
+            ForEach(viewModel.orders) { order in
                 NavigationLink {
                     OrderEditView(order: order)
                 } label: {
@@ -38,22 +39,31 @@ struct OrderListView: View {
     }
 
     private func addOrder() {
-        withAnimation {
-            let newOrder = Order(orderItems: [], nameOnOrder: String.randomWord().capitalized)
-            modelContext.insert(newOrder)
+        let newOrder = Order(orderItems: [], nameOnOrder: String.randomWord().capitalized)
+        Task {
+            do {
+                try await viewModel.save(order: newOrder)
+            } catch {
+                logger.error("Failed to save new order. \(error.localizedDescription)")
+            }
         }
     }
 
     private func deleteOrders(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(orders[index])
+        let ordersToDelete = offsets.map { viewModel.orders[$0] }
+        Task {
+            do {
+                for order in ordersToDelete {
+                    try await viewModel.delete(order: order)
+                }
+            } catch {
+                logger.error("Failed to delete orders. \(error.localizedDescription)")
             }
         }
     }
 }
 
 #Preview {
-    OrderListView()
+    OrderListView(viewModel: OrderListViewModel())
         .modelContainer(for: OrderItem.self, inMemory: true)
 }

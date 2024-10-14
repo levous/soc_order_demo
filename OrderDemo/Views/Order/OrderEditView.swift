@@ -5,24 +5,32 @@
 //  Created by Russell Zarse on 9/7/24.
 //
 
-
+import OSLog
 import SwiftUI
 import SwiftData
 
 struct OrderEditView: View {
-    @Environment(\.modelContext) private var modelContext
     
-    let order: Order
+    private let logger = Logger.make(withType: OrderEditView.self)
+    let viewModel: OrderEditViewModel
+    
+    init(order: Order) {
+        self.init(viewModel: OrderEditViewModel(order: order))
+    }
+    
+    init(viewModel: OrderEditViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         List {
-            if order.orderItems.isEmpty {
+            if viewModel.order.orderItems.isEmpty {
                 Button("Add an Order Item") {
                     addItem()
                 }
             }
             
-            ForEach(order.dateDescendingSortedOrderItems) { item in
+            ForEach(viewModel.dateDescendingSortedOrderItems) { item in
                 NavigationLink {
                     OrderItemDetailView(orderItem: item)
                 } label: {
@@ -43,22 +51,30 @@ struct OrderEditView: View {
                 }
             }
         }
-        .navigationTitle("\(order.nameOnOrder) Order Items")
+        .navigationTitle("\(viewModel.order.nameOnOrder) Order Items")
     }
 
     private func addItem() {
-        withAnimation {
-            let newItem = OrderItem(itemTitle: String.randomWord().capitalized)
-            newItem.order = order
-            order.orderItems.append(newItem)
-            modelContext.insert(newItem)
+        let newItem = OrderItem(itemTitle: String.randomWord().capitalized)
+        Task {
+            do {
+                try await viewModel.add(orderItem: newItem)
+            } catch {
+                logger.error("Failed to add new order item. \(error.localizedDescription)")
+            }
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(order.dateDescendingSortedOrderItems[index])
+        
+        let orderItems = offsets.map { viewModel.dateDescendingSortedOrderItems[$0] }
+        Task {
+            do {
+                for orderItem in orderItems {
+                    try await viewModel.delete(orderItem: orderItem)
+                }
+            } catch {
+                logger.error("Failed to delete order item. \(error.localizedDescription)")
             }
         }
     }
@@ -66,5 +82,4 @@ struct OrderEditView: View {
 
 #Preview {
     OrderEditView(order: PreviewData.orders[0])
-        .modelContainer(for: OrderItem.self, inMemory: true)
 }
