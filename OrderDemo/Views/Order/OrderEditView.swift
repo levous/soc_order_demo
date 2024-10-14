@@ -22,7 +22,9 @@ struct OrderEditView: View {
                 }
             }
             
-            ForEach(order.orderItems) { item in
+            ForEach(order.orderItems.sorted(by: { item1, item2 in
+                item1.createdAt > item2.createdAt
+            })) { item in
                 NavigationLink {
                     OrderItemDetailView(orderItem: item)
                 } label: {
