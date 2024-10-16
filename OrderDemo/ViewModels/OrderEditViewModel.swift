@@ -34,10 +34,8 @@ final class OrderEditViewModel {
     }
     
     func delete(orderItem: OrderItem) async throws {
-//        withAnimation {
-//            order.orderItems.removeAll { $0.persistentModelID == orderItem.persistentModelID }
-//        }
         try await orderDataService.delete(orderItem: orderItem)
+        self.order = try await orderDataService.fetchOrder(byPersistentID: self.order.persistentModelID)
     }
     
     func save() async throws {

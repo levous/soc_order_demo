@@ -6,6 +6,11 @@
 //
 
 import Foundation
+import SwiftData
+
+enum DataServiceError: Error {
+    case notFound
+}
 
 protocol DataService {
     init(orderDB: any Database<Order>, orderItemDB: any Database<OrderItem>)
@@ -28,6 +33,16 @@ class OrderDataService: DataService {
         )
     }
     
+    func fetchOrder(byPersistentID persistentModelID: PersistentIdentifier) async throws -> Order {
+        let orders = try await fetchOrders()
+        guard let order = orders.first(where: { candidateOrder in
+            candidateOrder.persistentModelID == persistentModelID
+        }) else {
+            throw DataServiceError.notFound
+        }
+        return order
+    }
+    
     func save(order: Order) async throws {
         try orderDB.update(order)
     }
@@ -41,11 +56,11 @@ class OrderDataService: DataService {
     }
     
     func delete(orderItem: OrderItem) async throws {
-//        if let order = orderItem.order,
-//           !order.orderItems.isEmpty {
-//            order.orderItems.removeAll { orderItem.persistentModelID == $0.persistentModelID }
-//            try orderDB.update(order)
-//        }
+        if let order = orderItem.order,
+           !order.orderItems.isEmpty {
+            order.orderItems.removeAll { orderItem.persistentModelID == $0.persistentModelID }
+            try orderDB.update(order)
+        }
         try orderItemDB.delete(orderItem)
     }
 }
