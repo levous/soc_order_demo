@@ -22,7 +22,7 @@ extension String {
         ]
         
         // consonant combinations that cannot start a word
-        var cons_cant_start: [String] = [
+        let cons_cant_start: [String] = [
             "ck", "cm",
             "dr", "ds",
             "ft",
@@ -36,7 +36,7 @@ extension String {
             "ts", "tch"
         ]
         
-        var vows : [String] = [
+        let vows : [String] = [
             // single vowels
             "a", "e", "i", "o", "u", "y",
             // vowel combinations your language allows
@@ -66,7 +66,7 @@ extension String {
             
             
             // check if random sign fits in word length
-            var tempWord = "\(word)\(rnd)"
+            let tempWord = "\(word)\(rnd)"
             if( tempWord.count <= wordLength ) {
                 word = "\(word)\(rnd)"
                 // alternate sounds
